@@ -61,7 +61,7 @@ type LATAOResponse struct {
 	} `json:"bestPrices"`
 }
 
-
+// https://goplay.space/#-fbQ6tq3AQC
 func lataoFlightInfos() (lf LataoResponse, err error) {
 	req, err := http.NewRequest("GET", "https://bff.latam.com/ws/proxy/booking-webapp-bff/v1/public/revenue/bestprices/oneway?departure=2020-03-14^&origin=RIO^&destination=SAO^&cabin=Y^&country=BR^&language=PT^&home=pt_br^&adult=1^&promoCode=", nil)
 	if err != nil {
@@ -86,5 +86,6 @@ func lataoFlightInfos() (lf LataoResponse, err error) {
 		return
 	}
 	defer resp.Body.Close()
+	json.NewDecoder(req.Body).Decode(&lf)
 	return
 }
